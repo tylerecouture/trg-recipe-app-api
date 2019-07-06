@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.7-slim
 LABEL maintainer="tylerecouture"
 
 ENV PYTHONUNBUFFERED 1
@@ -9,6 +9,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
 
-RUN adduser -D appuser
+RUN groupadd -g 999 appuser && \
+    useradd -r -u 999 -g appuser appuser
 USER appuser
 
